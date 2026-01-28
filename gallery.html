@@ -115,6 +115,7 @@
     img.src = `gallery/photo (${i}).jpg`;
     img.alt = `gallery photo ${i}`;
     img.loading = "lazy";
+    img.onerror=()=>img.remove();
 
     // クリックで拡大
     img.addEventListener("click", () => {
