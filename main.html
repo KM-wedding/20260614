@@ -151,6 +151,14 @@
       font-size: 28px;
     }
 
+.countdown-label {
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #f6b26f;
+  margin-bottom: 10px;
+}
+
+
 .countdown-box {
   position: relative;
   display: inline-block;
@@ -425,6 +433,8 @@ section.hosts {
   </header>
 
   <section class="countdown" id="countdown">
+   
+    <p class="countdown-label">Wedding Day</p>
    <div class="countdown-box">
  
 
@@ -540,9 +550,12 @@ const slides = document.querySelectorAll(".hero-image");
 let current = 0;
 let active = 0;
 
+
 // 初期表示
 slides[0].style.backgroundImage = `url("${images[0]}")`;
 slides[0].classList.add("active");
+
+
 
 setInterval(() => {
   const next = (active + 1) % slides.length;
