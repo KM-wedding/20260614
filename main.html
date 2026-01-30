@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Wedding Invitation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- main.html の <head> 内に追加 -->
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+IN:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+
 
   <style>
     body {
@@ -152,11 +156,20 @@
     }
 
 .countdown-label {
+  font-family: 'Playwrite IN', serif;
   font-size: 18px;
-  letter-spacing: 3px;
-  color: #f6b26f;
+  letter-spacing: 2px;
+  color: #f5a535;   /* やさしいベージュ */
   margin-bottom: 10px;
 }
+
+@media (max-width: 768px) {
+  .countdown-label {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+  }
+}
+
 
 
 .countdown-box {
