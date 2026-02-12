@@ -126,8 +126,9 @@
       transform: translateY(0);
     }
 
-    .year {
-      font-size: 16px;
+    .year,
+    .week {
+      font-size: 20px;
       letter-spacing: 4px;
       margin-bottom: 10px;
     }
@@ -136,7 +137,7 @@
       display: flex;
       justify-content: center;
       gap: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 5px;
     }
 
     .month,
@@ -220,6 +221,15 @@
       margin-bottom: 0;
     }
 
+sp-br {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  sp-br {
+    display: inline;
+  }
+}
+
 .section-inner {
   max-width: 900px;
   margin: 0 auto;
@@ -296,6 +306,27 @@ section:not(.hosts){
   transform: translateY(-3px);
 }
 
+  .access-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: #f4d33f; /* 上品オレンジ */
+  color: #fffffffd;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+  .access-button:hover {
+  background-color: #eaea0b; /* 少し濃く */
+  transform: translateY(-3px);
+}
 /* ===== Hosts profile ===== */
 .profile-title {
   text-align: center;
@@ -456,6 +487,7 @@ section.hosts {
       <span class="month">06</span>
       <span class="day">14</span>
     </div>
+    <div class="week">Sun. 11:00 </div>
     <div class="days-left">
       Days left <span id="days">--</span>
     </div>
@@ -467,9 +499,9 @@ section.hosts {
     <img src="greeting.jpg" alt="ご挨拶の写真">
     <h2>ご挨拶</h2>
     <p>
-      私たちはこのたび結婚式を挙げる運びとなりました。<br>
+      私たちはこのたび結婚式を挙げる<br class="sp-br">運びとなりました。<br>
       日頃お世話になっている皆さまへ、<br>
-      感謝の気持ちを込めて当日を迎えたいと思っております。<br><br>
+      感謝の気持ちを込めて<br class="sp-br">当日を迎えたいと思っております。<br><br>
       ささやかな式ではございますが、<br>
       どうぞごゆっくりお過ごしください。
     </p>
@@ -517,7 +549,7 @@ section.hosts {
     <p><span>出身地</span>：岡山県倉敷市</p>
     <p><span>職業</span>：CS</p>
     <p><span>趣味</span>：旅行・パン作り</p>
-    <p class="comment">パンが発酵しやすい季節ですね</p>
+    <p class="comment">パンの発酵をみるのがすき</p>
   </div>
 </div>
 
@@ -530,8 +562,8 @@ section.hosts {
   <div class="section-inner">
     <img src="table1.jpg" alt="テーブルセッティングの写真">
     <p class="rsvp-text">
-      お手数ではございますが<br>
-      ４月30日までにご返信くださいますよう<br>
+      ご多忙の中、お手数ではございますが<br>
+      ４月１２日までにご返信くださいますよう<br>
       お願い申し上げます
     </p>
 
@@ -539,6 +571,12 @@ section.hosts {
        target="_blank"
        class="rsvp-button">
       招待状に<br>回答する
+    </a>
+
+       <a href="access.html"
+       target="_blank"
+       class="access-button">
+      当日の<br>スケジュール
     </a>
   </div>
   </section>
