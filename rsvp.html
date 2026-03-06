@@ -228,6 +228,7 @@ message:document.getElementById("message").value
 
 await fetch(GAS_URL,{
 method:"POST",
+mode:"no-cors",
 body:JSON.stringify(data)
 })
 
@@ -236,7 +237,6 @@ alert("ご連絡ありがとうございました")
 location.href="index.html"
 
 }
-
 
 
 async function submitAttend(){
@@ -274,6 +274,7 @@ message:document.getElementById("message2").value
 
 await fetch(GAS_URL,{
 method:"POST",
+mode:"no-cors",
 body:JSON.stringify(data)
 })
 
