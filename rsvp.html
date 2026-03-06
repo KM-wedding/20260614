@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ご出欠回答</title>
+
+<style>
+
+body{
+font-family: "Hiragino Mincho ProN", serif;
+background:#faf6f2;
+margin:0;
+padding:40px 20px;
+text-align:center;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:white;
+padding:40px 30px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+h1{
+font-size:22px;
+margin-bottom:30px;
+}
+
+button{
+padding:12px 20px;
+margin:10px;
+border:none;
+border-radius:6px;
+background:#c7a17a;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin:8px 0 16px;
+border:1px solid #ddd;
+border-radius:6px;
+font-size:14px;
+}
+
+textarea{
+height:80px;
+}
+
+.hidden{
+display:none;
+}
+
+.section{
+margin-top:20px;
+text-align:left;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<h1>ご出欠の回答</h1>
+
+
+<!-- 出欠選択 -->
+
+<div id="step1">
+
+<button onclick="selectAttend('出席')">出席する</button>
+<button onclick="selectAttend('欠席')">欠席する</button>
+
+</div>
+
+
+
+<!-- 欠席 -->
+
+<div id="decline" class="hidden section">
+
+<p>新郎新婦へメッセージ（任意）</p>
+
+<textarea id="message"></textarea>
+
+<button onclick="submitDecline()">送信して退室</button>
+
+</div>
+
+
+
+<!-- 出席フォーム -->
+
+<div id="attendForm" class="hidden section">
+
+<label>出席内容（必須）</label>
+
+<select id="attendtype">
+<option value="">選択してください</option>
+<option>挙式披露宴へ出席</option>
+<option>挙式のみ出席</option>
+<option>披露宴のみ出席</option>
+</select>
+
+<label>ゲスト区分（必須）</label>
+
+<select id="side">
+<option value="">選択してください</option>
+<option>新郎側ゲスト</option>
+<option>新婦側ゲスト</option>
+</select>
+
+<label>お名前（必須）</label>
+
+<input id="name">
+
+<label>ご住所（任意）</label>
+
+<input id="address">
+
+<label>電話番号（必須）</label>
+
+<input id="phone">
+
+<label>アレルギーや食事制限</label>
+
+<textarea id="allergy"></textarea>
+
+<label>お連れ様はいらっしゃいますか？</label>
+
+<select id="companion" onchange="companionCheck()">
+<option value="">選択してください</option>
+<option value="いない">いない</option>
+<option value="いる">いる</option>
+</select>
+
+
+
+<!-- 同伴者 -->
+
+<div id="guestArea" class="hidden">
+
+<h3>お連れ様</h3>
+
+<input id="g1" placeholder="1人目 お名前・年齢">
+<input id="g1a" placeholder="1人目 アレルギー">
+
+<input id="g2" placeholder="2人目 お名前・年齢">
+<input id="g2a" placeholder="2人目 アレルギー">
+
+<input id="g3" placeholder="3人目 お名前・年齢">
+<input id="g3a" placeholder="3人目 アレルギー">
+
+</div>
+
+
+<label>新郎新婦へのメッセージ（任意）</label>
+
+<textarea id="message2"></textarea>
+
+
+<button onclick="submitAttend()">送信</button>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+const GAS_URL = "https://script.google.com/macros/s/AKfycbwsCxrJEGISjs09UW6HjSm6I8Zla_LlNHHAPb6v8Oc9EOJZ3gdR4bAtydyTEQFIuIgQBg/exec";
+
+let attendance="";
+
+function selectAttend(type){
+
+attendance=type;
+
+document.getElementById("step1").style.display="none";
+
+if(type==="欠席"){
+document.getElementById("decline").classList.remove("hidden");
+}
+
+if(type==="出席"){
+document.getElementById("attendForm").classList.remove("hidden");
+}
+
+}
+
+
+
+function companionCheck(){
+
+const val=document.getElementById("companion").value;
+
+if(val==="いる"){
+document.getElementById("guestArea").classList.remove("hidden");
+}else{
+document.getElementById("guestArea").classList.add("hidden");
+}
+
+}
+
+
+
+async function submitDecline(){
+
+const data={
+attend:"欠席",
+message:document.getElementById("message").value
+}
+
+await fetch(GAS_URL,{
+method:"POST",
+body:JSON.stringify(data)
+})
+
+alert("ご連絡ありがとうございました")
+
+location.href="index.html"
+
+}
+
+
+
+async function submitAttend(){
+
+const data={
+
+attend:"出席",
+
+attendtype:document.getElementById("attendtype").value,
+
+side:document.getElementById("side").value,
+
+name:document.getElementById("name").value,
+
+address:document.getElementById("address").value,
+
+phone:document.getElementById("phone").value,
+
+allergy:document.getElementById("allergy").value,
+
+companion:document.getElementById("companion").value,
+
+g1:document.getElementById("g1").value,
+g1a:document.getElementById("g1a").value,
+
+g2:document.getElementById("g2").value,
+g2a:document.getElementById("g2a").value,
+
+g3:document.getElementById("g3").value,
+g3a:document.getElementById("g3a").value,
+
+message:document.getElementById("message2").value
+
+}
+
+await fetch(GAS_URL,{
+method:"POST",
+body:JSON.stringify(data)
+})
+
+alert("送信しました")
+
+location.href="index.html"
+
+}
+
+</script>
+
+</body>
+</html>
