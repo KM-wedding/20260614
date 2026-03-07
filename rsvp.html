@@ -67,6 +67,12 @@ margin-top:20px;
 text-align:left;
 }
 
+#sending{
+margin-top:20px;
+font-size:14px;
+color:#888;
+}
+
 </style>
 </head>
 
@@ -74,6 +80,9 @@ text-align:left;
 <body>
 
 <div class="container">
+<div id="sending" class="hidden">
+送信中です。少々お待ちください…
+</div>
 
 <h1>ご出欠の回答</h1>
 
@@ -92,6 +101,10 @@ text-align:left;
 <!-- 欠席 -->
 
 <div id="decline" class="hidden section">
+
+<label>お名前（必須）</label>
+<input id="declineName">
+
 
 <p>新郎新婦へメッセージ（任意）</p>
 
@@ -126,15 +139,15 @@ text-align:left;
 
 <label>お名前（必須）</label>
 
-<input id="name">
+<input id="name" autocomplete="name">
 
 <label>ご住所（任意）</label>
 
-<input id="address">
+<input id="address" autocomplete="street-address">
 
 <label>電話番号（必須）</label>
 
-<input id="phone">
+<input id="phone" type="tel" autocomplete="tel">
 
 <label>アレルギーや食事制限</label>
 
@@ -175,6 +188,11 @@ text-align:left;
 
 <button onclick="submitAttend()">送信</button>
 
+</div>
+
+<!-- 送信中表示 -->
+<div id="sending" class="hidden">
+送信中です。少々お待ちください…
 </div>
 
 </div>
@@ -221,8 +239,18 @@ document.getElementById("guestArea").classList.add("hidden");
 
 async function submitDecline(){
 
+const name = document.getElementById("declineName").value.trim()
+
+if(name===""){
+alert("お名前をご入力ください")
+return
+}
+
+document.getElementById("sending").classList.remove("hidden")
+
 const data={
 attend:"欠席",
+name:name,
 message:document.getElementById("message").value
 }
 
@@ -232,7 +260,7 @@ mode:"no-cors",
 body:JSON.stringify(data)
 })
 
-alert("ご連絡ありがとうございました")
+alert("ご多忙の中、ご回答いただきありがとうございました。\n引き続き、私たち夫婦のことを何卒よろしくお願い申し上げます。")
 
 location.href="index.html"
 
@@ -240,6 +268,8 @@ location.href="index.html"
 
 
 async function submitAttend(){
+
+document.getElementById("sending").classList.remove("hidden")
 
 const data={
 
@@ -278,7 +308,8 @@ mode:"no-cors",
 body:JSON.stringify(data)
 })
 
-alert("送信しました")
+alert("ご多忙の中、回答いただきありがとうございます。\nお会いできる日を心より楽しみにしております。\n当日は何卒よろしくお願いいたします。")
+
 
 location.href="index.html"
 
