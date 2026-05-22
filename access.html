@@ -2,39 +2,6 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <script>
-  // 公開日時（日本時間）
-  const releaseDate = new Date("2026-06-14T00:00:00+09:00");
-
-  // 現在時刻
-  const now = new Date();
-
-  // 公開前なら Coming Soon 表示
-  if (now < releaseDate) {
-
-    document.addEventListener("DOMContentLoaded", () => {
-
-      document.body.innerHTML = `
-        <div style="
-          height:100vh;
-          display:flex;
-          justify-content:center;
-          align-items:center;
-          font-family:'Playfair Display', serif;
-          background:#f7f1ea;
-          letter-spacing:0.12em;
-          font-size:28px;
-          color:#555;
-        ">
-          Coming Soon...
-        </div>
-      `;
-
-    });
-
-  }
-</script>
-  
   <title>Access</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">

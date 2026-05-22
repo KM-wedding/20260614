@@ -3,6 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+    // 公開日時（日本時間）
+    const releaseDate = new Date("2026-06-14T00:00:00+09:00");
+
+    // 現在時刻
+    const now = new Date();
+
+    // 公開前なら Coming Soon 表示
+    if (now < releaseDate) {
+
+      document.addEventListener("DOMContentLoaded", () => {
+
+        document.body.innerHTML = `
+          <div style="
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-family:serif;
+            background:#f7f1ea;
+            letter-spacing:0.1em;
+            font-size:24px;
+          ">
+            Our Story Opens on June 14, 2026
+          </div>
+        `;
+
+      });
+
+    }
+  </script>
   <title>Profile Book</title>
 
   <style>
