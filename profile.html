@@ -1,24 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
-  
-  <body>
-    <header id="site-header">
-  <nav class="nav">
-    <a href="index.html">Main</a>
-    <a href="profile.html">Profile</a>
-    <a href="access.html">Access</a>
-    <a href="gallery.html">Gallery</a>
-  </nav>
-</header>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile Book</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -28,8 +16,27 @@
       overflow-x: hidden;
     }
 
+    #site-header {
+      padding: 16px 0;
+      text-align: center;
+      background: rgba(247,241,234,0.9);
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+    }
+
+    .site-nav a {
+      color: #333;
+      text-decoration: none;
+    }
+
     .page {
-      min-height: 100vh;
+      min-height: calc(100vh - 50px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -46,7 +53,6 @@
     .book-wrap {
       width: 100%;
       max-width: 430px;
-      position: relative;
     }
 
     .book-img {
@@ -58,7 +64,7 @@
       transition: opacity 0.25s ease;
     }
 
-    .nav {
+    .book-nav {
       width: 100%;
       max-width: 430px;
       margin-top: 18px;
@@ -101,7 +107,7 @@
 
     @media (min-width: 768px) {
       .book-wrap,
-      .nav {
+      .book-nav {
         max-width: 520px;
       }
 
@@ -109,12 +115,19 @@
         font-size: 26px;
       }
     }
-
-    
   </style>
 </head>
 
 <body>
+  <header id="site-header">
+    <nav class="site-nav">
+      <a href="index.html">Main</a>
+      <a href="profile.html">Profile</a>
+      <a href="access.html">Access</a>
+      <a href="gallery.html">Gallery</a>
+    </nav>
+  </header>
+
   <main class="page">
     <h1 class="title">Profile Book</h1>
 
@@ -122,7 +135,7 @@
       <img id="bookImage" class="book-img" src="profile/cover1.jpg" alt="Profile Book">
     </div>
 
-    <div class="nav">
+    <div class="book-nav">
       <button id="prevBtn">← Prev</button>
       <div class="count"><span id="current">1</span> / <span id="total">6</span></div>
       <button id="nextBtn">Next →</button>
@@ -133,13 +146,12 @@
 
   <script>
     const images = [
-      "profile/slide1.jpg",
       "profile/cover1.jpg",
-      "profile/slide2.jpg",
-      "profile/slide3.jpg",
-      "profile/slide4.jpg",
-      "profile/cover2.jpg",
-      
+      "profile/slide1.JPG",
+      "profile/slide2.JPG",
+      "profile/slide3.JPG",
+      "profile/slide4.JPG",
+      "profile/cover2.jpg"
     ];
 
     let index = 0;
@@ -152,7 +164,6 @@
 
     total.textContent = images.length;
 
-    // 先読み
     images.forEach(src => {
       const img = new Image();
       img.src = src;
@@ -175,19 +186,10 @@
       }, 180);
     }
 
-    prevBtn.addEventListener("click", () => {
-      showPage(index - 1);
-    });
+    prevBtn.addEventListener("click", () => showPage(index - 1));
+    nextBtn.addEventListener("click", () => showPage(index + 1));
+    bookImage.addEventListener("click", () => showPage(index + 1));
 
-    nextBtn.addEventListener("click", () => {
-      showPage(index + 1);
-    });
-
-    bookImage.addEventListener("click", () => {
-      showPage(index + 1);
-    });
-
-    // スワイプ対応
     let startX = 0;
 
     bookImage.addEventListener("touchstart", e => {
@@ -199,17 +201,12 @@
       const diff = startX - endX;
 
       if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          showPage(index + 1);
-        } else {
-          showPage(index - 1);
-        }
+        if (diff > 0) showPage(index + 1);
+        else showPage(index - 1);
       }
     });
 
     showPage(0);
-
-    
   </script>
 </body>
 </html>
